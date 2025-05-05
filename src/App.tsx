@@ -1,8 +1,16 @@
+import BudgetForm from "./components/BudgetForm"
+
 function App() {
 
     return (
         <>
-    
+            <div className="bg-blue-600 py-8 max-h-72">
+                <h1 className="text-white font-black text-4xl uppercase text-center">Planificador de Gastos</h1>
+            </div>
+
+            <div className="max-w-3xl mx-auto bg-white shadow-lg p-10 mt-10 rounded-lg">
+                <BudgetForm />
+            </div>
         </>
     )
 }
