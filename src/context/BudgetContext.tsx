@@ -10,20 +10,20 @@ type BudgetProvideProps = {
     children: ReactNode
 }
 
-export const BudgetConntext = createContext<BudgetContextProps>(null!)
+export const BudgetContext = createContext<BudgetContextProps>(null!)
 
-export const BudgetProvide = ({ children }: BudgetProvideProps) => {
+export const BudgetProvider = ({ children }: BudgetProvideProps) => {
 
     const [state, dispatch] = useReducer(BudgetReducers, initialState)
 
     return (
-        <BudgetConntext.Provider
+        <BudgetContext.Provider
             value={{
                 state,
                 dispatch
             }}
         >
             {children}
-        </BudgetConntext.Provider>
+        </BudgetContext.Provider>
     )
 }
