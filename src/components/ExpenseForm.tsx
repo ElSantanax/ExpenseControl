@@ -48,6 +48,15 @@ export default function ExpenseForm() {
 
         // agrego un nuevo gasto 
         dispatch({ type: 'add-expense', payload: { expense } })
+
+        // reiniciar state
+        setExpense({
+            amount: 0,
+            expenseName: '',
+            category: '',
+            date: new Date()
+        })
+
     }
 
     return (

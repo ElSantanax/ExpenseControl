@@ -58,7 +58,8 @@ export const BudgetReducers = (
 
         return {
             ...state,
-            expenses: [...state.expenses, expense]
+            expenses: [...state.expenses, expense],
+            modal: false
         }
     }
 
