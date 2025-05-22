@@ -24,8 +24,16 @@ export default function ExpenseForm() {
         if (state.editingId) {
             const editingIdExpense = state.expenses.filter(currentExpense => currentExpense.id === state.editingId)[0]
             setExpense(editingIdExpense)
+        } else {
+            // Resetear el formulario cuando no hay gasto en edición
+            setExpense({
+                amount: 0,
+                expenseName: '',
+                category: '',
+                date: new Date()
+            })
         }
-    }), [state.editingId]
+    }, [state.editingId, state.expenses])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target
@@ -53,8 +61,12 @@ export default function ExpenseForm() {
             return
         }
 
-        // agrego un nuevo gasto 
-        dispatch({ type: 'add-expense', payload: { expense } })
+        // agregar o actualizar el gasto
+        if (state.editingId) {
+            dispatch({ type: 'update-expense', payload: { expense: { id: state.editingId, ...expense } } })
+        } else {
+            dispatch({ type: 'add-expense', payload: { expense } })
+        }
 
         // reiniciar state
         setExpense({
