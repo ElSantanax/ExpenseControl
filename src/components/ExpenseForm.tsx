@@ -136,7 +136,7 @@ export default function ExpenseForm() {
 
                 <select
                     id="category"
-                    defaultValue="" className="bg-slate-200 p-2 rounded"
+                    className="bg-slate-200 p-2 rounded"
                     name="category"
                     value={expense.category}
                     onChange={handleChange}
