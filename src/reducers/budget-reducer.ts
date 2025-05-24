@@ -112,7 +112,8 @@ export const BudgetReducers = (
             budget: 0,
             expenses: [],
             modal: false,
-            editingId: ''
+            editingId: '',
+            currentCategory: ''  // Añadimos esta propiedad que faltaba
         }
     }
 
