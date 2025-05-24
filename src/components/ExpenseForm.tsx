@@ -18,12 +18,14 @@ export default function ExpenseForm() {
     })
 
     const [error, setError] = useState('')
-    const { dispatch, state } = useBudget()
+    const [previousAmount, setPreviousAmount] = useState<number | undefined>(undefined)
+    const { dispatch, state, remainingBudget } = useBudget()
 
     useEffect(() => {
         if (state.editingId) {
             const editingIdExpense = state.expenses.filter(currentExpense => currentExpense.id === state.editingId)[0]
             setExpense(editingIdExpense)
+            setPreviousAmount(editingIdExpense.amount)
         } else {
             // Resetear el formulario cuando no hay gasto en edición
             setExpense({
@@ -53,11 +55,16 @@ export default function ExpenseForm() {
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
-        // validar
+        e.preventDefault()        // validar
         if (Object.values(expense).includes('')) {
             setError('Todos los campos son obligatorios')
+            return
+        }
+
+        // Validar si se pasa del presupuesto
+        const amountToValidate = state.editingId ? (expense.amount - (previousAmount ?? 0)) : expense.amount
+        if (amountToValidate > remainingBudget) {
+            setError('El gasto sobrepasa el presupuesto')
             return
         }
 
@@ -66,15 +73,14 @@ export default function ExpenseForm() {
             dispatch({ type: 'update-expense', payload: { expense: { id: state.editingId, ...expense } } })
         } else {
             dispatch({ type: 'add-expense', payload: { expense } })
-        }
-
-        // reiniciar state
+        }        // reiniciar state y limpiar error
         setExpense({
             amount: 0,
             expenseName: '',
             category: '',
             date: new Date()
         })
+        setError('')
 
     }
 
