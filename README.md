@@ -183,3 +183,6 @@ Desarrollado con ❤️ para el control eficiente de gastos personales.
 ---
 
 **¡Comienza a controlar tus gastos de manera inteligente y visual!** 💰📊
+
+<img width="1920" height="1274" alt="CapturePage(2)" src="https://github.com/user-attachments/assets/4edf2a40-3843-49cb-9b0f-efd73f639bb7" />
+
